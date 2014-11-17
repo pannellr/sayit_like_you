@@ -1,0 +1,13 @@
+from django.forms import ModelForm
+from django import forms
+from models import Question, Answer, Language
+
+
+class QuestionForm(ModelForm):
+     class Meta:
+         model = Question
+         fields = ['question', 'tags']
+
+class AnswerForm(forms.Form):
+	language = forms.CharField(max_length=200, widget=forms.Select(choices=LANGUAGE_CHOICES)
+	answer = forms.CharField(widget=forms.Textarea)

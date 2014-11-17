@@ -7,17 +7,24 @@
   </hgroup>
   
   <p><em>{{ question.tags }}</em></p>
-  <a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Answer</a>
 
-{% if question.answers %}
-{% for answer in question.answers %}
+{{question.answers}}
+
+{% if question.answer_set.all %}
+{% for answer in question.answer_set.all %}
 <div class="answer-wrapper">
   <p>{{ answer.answer }}</p>
-  <p>{{answer.user.username }} said in {{ answer.language.name }}</p>
+  <p>{{answer.user.username }} said it in {{ answer.language }}</p>
 <div
 {% endfor %}
 {% endif %}
 </div>
+
+{% if question.answer_set.all %}
+<a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Say it Like You!</a>
+{% else %}
+<a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Answer Question</a>
+{% endif %}
 
 <hr />
 {% endfor %}

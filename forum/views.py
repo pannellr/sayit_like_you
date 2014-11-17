@@ -26,11 +26,16 @@ class NewQuestionView(CreateView):
 
 class NewAnswerView(CreateView):
     model = Answer
-    fields = ['answer']
+    fields = ['answer', 'language']
     success_url = reverse_lazy('index')
+
+    # def get_context_data(self, **kwargs):
+    #     context['question_id'] = self.kwargs['question_id']
+    #     return context
     
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         form.instance.user = self.request.user
+        form.instance.question = Question.objects.get(pk=self.kwargs['question_id'])
         return super(NewAnswerView, self).form_valid(form)

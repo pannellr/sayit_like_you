@@ -22,7 +22,7 @@ class Question(models.Model):
  
 class Answer(models.Model):
     question = models.ForeignKey(Question)
-    language = models.CharField(max_length=200, choices=LANGUAGE_CHOICES)
+    language = models.CharField(max_length=200, choices = LANGUAGE_CHOICES)
     user = models.ForeignKey(User)
     answer = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
