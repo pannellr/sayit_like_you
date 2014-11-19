@@ -8,40 +8,75 @@
   <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
   {% endif %}
 
-  <h1>Create an account</h1>
-  
-  <form method="post" action="" class="wide">
-	{% csrf_token %}
-    <p>
-      <label for="id_username">Username:</label>
-      {% if form.username.errors %}
-        <p class="errors">{{ form.username.errors.as_text }}</p>
-      {% endif %}
-      {{ form.username }}
+  <form class="form-horizontal" action='' method="POST">
+{% csrf_token %}
+  <fieldset>
+    <div id="legend">
+      <legend class="">Register</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Username</label>
+      <div class="controls">
+          <p>
+            {% if form.username.errors %}
+             <p class="errors">{{ form.username.errors.as_text }}</p>
+            {% endif %}
+           {{ form.username }}
     </p>
-    <p>
-      <label for="id_email">Email address:</label>
-      {% if form.email.errors %}
-        <p class="errors">{{ form.email.errors.as_text }}</p>
-      {% endif %}
-      {{ form.email }}
-    </p>
-    <p>
-      <label for="id_password1">Password:</label>
-      {% if form.password1.errors %}
-        <p class="errors">{{ form.password1.errors.as_text }}</p>
-      {% endif %}
-      {{ form.password1 }}
-    </p>
-    <p>
-      <label for="id_password2">Password (type again to catch typos):</label>
-      {% if form.password2.errors %}
-        <p class="errors">{{ form.password2.errors.as_text }}</p>
-      {% endif %}
-      {{ form.password2 }}
-    </p>
-    <p class="submit"><input type="submit" value="Register &rarr;"></p>
-  </form>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" for="email">E-mail</label>
+      <div class="controls">
+        <p>
+          {% if form.email.errors %}
+            <p class="errors">{{ form.email.errors.as_text }}</p>
+          {% endif %}
+          {{ form.email }}
+        </p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+       <p>
+        {% if form.password1.errors %}
+          <p class="errors">{{ form.password1.errors.as_text }}</p>
+        {% endif %}
+        {{ form.password1 }}
+      </p>
+        <p class="help-block">Password should be at least 4 characters</p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password -->
+      <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+      <div class="controls">
+        <p>
+          {% if form.password2.errors %}
+           <p class="errors">{{ form.password2.errors.as_text }}</p>
+          {% endif %}
+          {{ form.password2 }}
+        </p>
+        <p class="help-block">Please confirm password</p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <p class="submit"><input type="submit" value="Register &rarr;"></p>
+      </div>
+    </div>
+  </fieldset>
+  <br>
+</form>
   
 {% endblock %}
 
