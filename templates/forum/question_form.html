@@ -1,4 +1,45 @@
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create" />
-</form>
+{% extends "base.html" %}
+
+{% block title %}New Question{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+    <div class="row">
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+
+<fieldset>
+    <div id="legend">
+      <legend class="">Ask a Question</legend>
+    </div>	
+<form accept-charset="UTF-8" action="Question.html" method="POST">    			
+<label class="control-label" for="Title">Title</label>
+      <div class="controls">
+        <input type="text" id="Title" name="Title" placeholder="" class="input-xlarge">
+      
+      </div><br>
+				
+                    
+					
+					
+                       <label class="control-label" for="Question">Question</label> <textarea class="form-control counted" id="Question" name="Question" placeholder="Type in your question" rows="5" style="margin-bottom:10px;"></textarea>
+                        
+                        
+                        
+            <label class="control-label" for="Tags">Tags</label>
+      <div class="controls">
+        <input type="text" id="Tags" name="Tags" placeholder="" class="input-xlarge">
+      
+      </div><br>            
+                        {% csrf_token %}
+                        <input type="submit" value="Create" />
+                    </form>
+                </fieldset></div>
+            </div>
+        </div>
+	</div>
+</div>
+  
+{% endblock %}

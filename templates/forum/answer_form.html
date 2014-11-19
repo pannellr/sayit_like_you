@@ -1,4 +1,56 @@
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create" />
-</form>
+{% extends "base.html" %}
+
+{% block title %}Answer Question{% endblock %}
+
+{% block content %}
+	
+
+<div class="container">
+	<div class="container">
+    	<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            	<div class="panel panel-default">
+               	 <div class="panel-body">    
+					<fieldset>
+    					<div id="legend">
+     						 <legend class="">Question Title</legend>
+   						 </div>	Display question here
+               		</fieldset>
+               	</div>
+            </div>
+        </div>
+	</div>
+</div>
+	<div class="container">
+    	<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            	<div class="panel panel-default">
+                	<div class="panel-body">    
+						<fieldset>
+    						<div id="legend">
+      							<legend class="">Answer Question</legend>
+    						</div>	
+							<form accept-charset="UTF-8" action="Question.html" method="POST">    			
+								<div class="dropdown">
+ 									<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Language
+   										<span class="caret"></span>
+  									</button>
+  										<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+   											<li role="presentation"><a role="menuitem" tabindex="1">Java</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="2">C++</a></li>
+    										<li role="presentation"><a role="menuitem" tabindex="3">Python</a></li>
+  										</ul>
+								</div><br>
+                        	<textarea class="form-control counted" id="question" name="question" placeholder="Type in your answer" rows="5" style="margin-bottom:10px;">
+                        	</textarea> 
+                        	{% csrf_token %}
+                          <input type="submit" value="Create" />
+                    	</form>
+                	</fieldset>
+                </div>
+            </div>
+        </div>
+	</div>
+</div><br><br><br>
+
+{% endblock %}
