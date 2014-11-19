@@ -5,7 +5,7 @@
 <div class="container">
    <!-- top of tabs -->
     <br><br>
-	 <a href="http://web.cs.dal.ca/~elewis/AskQuestion.html"> <button type="button" class="btn btn-warning pull-right">Ask Question</button></a>
+	 <a href="/forum/question/new/"> <button type="button" class="btn btn-warning pull-right">Ask Question</button></a>
 	<br><br>
 	
 	<!--end -->
@@ -49,87 +49,52 @@
 	</li>
       </ul>
                 			
-      <!-- tab content 1-->
-    <div class="tab-content">
-      <div class="tab-pane active in" id="recent">
-        <div class="row">
-	  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-	    <p><br>
-	    </p>
-	    <div class="tab-content">
-	      <div class="tab-pane" id="tab"> 
-	        <div class="list-group">
-		  {% for question in latest_questions %}
-	          <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-	          <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-	          <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-		  {% endfor %}
+<!-- tab content 1-->
+<div class="tab-content">
+  
+  <div class="tab-pane active in" id="recent">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+	<p><br></p>
+          <div class="tab-content">
+	    <div class="tab-pane" id="tab"> 
+	      <div class="list-group">
+		{% for question in latest_questions %}
+		  
+		<span class="list-group-item" class="pull-right">
+		<h4><a href="Question.html">{{ question.question }}</a></h4>
+		<em class="pull-right">Author: {{ question.user.username }} Created: {{ question.created_at }}</em>
+		{% if question.answer_set.all %}
+		{% for answer in question.answer_set.all %}
+		<br />
+		<hr />
+		<p>{{ answer.answer }}</p>
+		<p><b>{{answer.user.username }} said it in {{ answer.language }}</b></p>
+		{% endfor %}
+		{% endif %}
+		<br />
+		{% if question.answer_set.all %}
+		<a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Say it Like You!</a>
+		{% else %}
+		<a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Answer Question</a>
+		{% endif %}
+		</span>  
+		{% endfor %}
 		</div>
-	    </div>
+	      </div>
+            </div><!-- end tab content?? --?
+	  </div><!-- end tab pane??  -->
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end tab pane -->
+  </div><!-- end tab content -->
 
-	    <!-- tab content 2-->
-	    <div class="tab-pane fade" id="viewed">
-	        <div class="list-group">
-		  {% for question in latest_questions %}
-		   <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-                        <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-                        <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-		  {% endfor %}
-                    </div>
-            	</div>
-		
-		<!-- tab content 3 -->
-        	<div class="tab-pane fade active in" id="unanswered">
-            	<div class="list-group">
-		  {% for question in latest_questions %}
-                	<span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-                    <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-                    <span class="list-group-item" class="pull-right"> <a href="Question.html">{{ question.question }}</a> </span>
-		  {% endfor %}
-                </div>
-			</div>
-        </div>
-    </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- 
+  
+  
+ </div><!-- well -->
+ </div><!-- end col -->
+ </div><!-- end row -->
  <br /><br /><br />
  	
-{% for question in latest_questions %}
-
-<div class="question-wrapper">
-  <hgroup>
-    <h3>Question: {{ question.question }}</h3>
-    <h4>Posted by: {{ question.user.username }}</h4>
-  </hgroup>
-  
-  <p><em>{{ question.tags }}</em></p>
-
-{{question.answers}}
-
-{% if question.answer_set.all %}
-{% for answer in question.answer_set.all %}
-<div class="answer-wrapper">
-  <p>{{ answer.answer }}</p>
-  <p>{{answer.user.username }} said it in {{ answer.language }}</p>
-<div
-{% endfor %}
-{% endif %}
-</div>
-
-{% if question.answer_set.all %}
-<a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Say it Like You!</a>
-{% else %}
-<a href="http://127.0.0.1:8000/forum/question/{{ question.id }}/answer/new">Answer Question</a>
-{% endif %}
-
-<hr />
-{% endfor %}
 
 {% endblock %}

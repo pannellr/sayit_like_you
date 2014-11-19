@@ -6,7 +6,15 @@ from .models import Question, Answer
 
 def index(request):
     latest_questions = Question.objects.order_by('-created_at')[:5]
-    context = {'latest_questions': latest_questions}
+
+    all_questions = Question.objects.all()
+
+    unanswered = list()
+    for question in all_questions:
+        if question.answer_set.all:
+            unanswered.append(question)
+        
+    context = {'latest_questions': latest_questions, 'unanswered': unanswered}
     return render(request, 'forum/index.html', context)
 
 def detail(request, question_id):
